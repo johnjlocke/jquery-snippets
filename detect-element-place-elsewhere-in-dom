@@ -1,0 +1,36 @@
+/*  Example HTML for our problem */
+
+<div class="entry">
+    <h1>Headline 1</h1>
+    <p><img />Image? Yes</p>
+    <p>Some Text that needs to stay put</p>
+    <p>More copy text</p>
+</div>
+
+<div class="entry">
+    <h1>Headline 2</h1>
+    <p>Text in a non image entry</p>
+    <p>This text has no image to keep it company</p>
+</div>
+
+<div class="entry">
+    <h1>Headline 3</h1>
+    <p><img />Another Image for Entries</p>
+    <p>Keep this body text below</p>
+    <p>Keep this text below the headline and image</p>
+</div>
+
+
+/* The jQuery for our Problem */
+
+$('div.entry').each(function(){
+    var $this = $(this);
+    if($this.find('img').length > 0) {
+        $this.find('h1').addClass('home-h1-adjust');   
+        var $img = $this.find('p').first().addClass('home-p-img-adjust');
+        $this.prepend($img);
+    }
+});
+
+
+/* The CSS can vary, but this is a good solution if you have that part figured out */
