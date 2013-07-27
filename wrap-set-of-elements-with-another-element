@@ -1,0 +1,24 @@
+// Uses jQuery filter() and (:eq) to wrap every so many elements with another element
+//
+// Assuming that we want to wrap every 10 <p> tags with a <div> tag with a class of "wrap"
+//
+// Lines 17 and 18: Grab an array of the element to wrap and get the length of that array
+// Line 19: Set the variable of how many <p> tage to count off
+// For Loop: Set counter to Zero, As long we haven't hit the end of the array, run the function, 
+// after function, add 10 to the counter
+// Filter array from counter index to counter index plus 10, bag it up and wrap it in our <div>
+// Rinse and repeat until we hit the end of the array.
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var $itemArray = $('p');
+	var $itemArrayLength = $itemArray.length;
+  var $wrapLength = 10;
+	for (var i=0; i < $itemArrayLength; i+=10){
+	      $itemArray.filter(':eq('+i+'),:lt('+(i+$wrapLength)+'):gt('+i+')').wrapAll('<div class="wrap" />');
+	};
+});
+</script> 
