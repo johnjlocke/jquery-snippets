@@ -1,0 +1,101 @@
+// Assuming we have a series of links, in a sidebar, in a portfolio, or wherever
+// The links are images, floated, but when we hover over those images,
+// we want to have a little title screen overlay pop up. That will also be a link.
+// Here's how I did this for one of my own WordPress projects.
+
+// PHP - I used Jetpack and the Popular Posts widget. You'll have to rewrite the PHP in the top-posts.php file 
+// This is close to line 180 or so
+
+if ( 'grid' == $display ) {
+  			echo "<div class='widgets-grid-layout no-grav'>\n";
+				foreach ( $posts as $post ) :
+				?>
+					<div class="widget-grid-view-image">
+						<a href="<?php echo esc_url( $post['permalink'] ); ?>" class="bump-view" data-bump-view="tp"><img src="<?php echo esc_url( $post['image'] ); ?>" /></a>
+                        <div class="popular-link-div"><a href="<?php echo esc_url( $post['permalink'] ); ?>" class="popular-link-a"><?php echo esc_attr( wp_kses ( $post['title'], array() )); ?></a></div>
+					</div>
+
+
+// If the Image Grid option is turned on, you change this bit of PHP. Your setup may vary.
+// you may also need to change the CSS inside the Jetpack plugin to fit your specific images.
+
+// HTML
+<div class="widget widget_top-posts">
+  <div class="widgets-grid-layout no-grav">
+    <div class="widget-grid-view-image">
+      <a href="http://www.foosite.com/post-1/" class="bump-view" data-bump-view="tp"><img src="/wp-content/uploads/2013/07/foo-image.jpg" /></a>
+      <div class="overlay"><a href="http://www.foosite.com/post-1/" class="popular-link-a">Foo Title</a></div>
+    </div>
+  </div>
+</div>
+
+// There's a containing div for the gallery, and the widget-grid-view-image is a module that we can repeat infinitely.
+// The a link surrounds the Featured Image. Then there is a div with an opaque background, and the link to our post.
+// We want to hide the div at first, make it reveal when we hover over it, and disappear when we remove the mouse.
+
+// CSS
+
+div {
+  display: block;
+}
+a {
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
+a img {
+  border: none;
+  text-decoration: none;
+}
+.your-image-gallery {
+  width: 100%;
+}
+.widget-grid-view-image {
+  display: block;
+  float: left;
+  max-width: 50%;
+  position: relative;
+}
+.widgets-grid-layout .widget-grid-view-image img {
+  width: 150px;
+  height: 113px;
+}
+.widget-grid-view-image a {
+  display: block;
+  margin: 0 2px 4px 0;
+}
+.overlay {
+  background: rgba(0,0,0,.77);
+  display: none;
+  height: 115px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+}
+.widget-grid-view-image .popular-link-a {
+  color: #fff;
+  padding: 10%;
+  text-align: center;
+  text-shadow: 0 1px #000;
+  display: block;
+  height: 72%;
+}
+
+// We're using two columns of images in a sidebar, hence the images being 50% width.
+// Our images are 150 x 113
+// You might need to experiment with the padding and height for the link on the overlay.
+
+// jQuery 
+
+<script>
+$(".widget-grid-view-image").hover(function() {
+    $(this).find(".popular-link-div").slideDown(444);
+    },
+   function(){ $(this).find(".popular-link-div").slideUp(444);
+  });
+
+</script> 
+
+// slideDown and slideUp are equivalent to adding display: "none" and "block", changing the height with the timing indicated.
