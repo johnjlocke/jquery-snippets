@@ -4,15 +4,15 @@
 // Here's how I did this for one of my own WordPress projects.
 
 // PHP - I used Jetpack and the Popular Posts widget. You'll have to rewrite the PHP in the top-posts.php file 
-// This is close to line 180 or so
+// This is close to line 188 or so
 
 if ( 'grid' == $display ) {
-  			echo "<div class='widgets-grid-layout no-grav'>\n";
+				echo "<div class='widgets-grid-layout no-grav'>\n";
 				foreach ( $posts as $post ) :
 				?>
 					<div class="widget-grid-view-image">
-						<a href="<?php echo esc_url( $post['permalink'] ); ?>" class="bump-view" data-bump-view="tp"><img src="<?php echo esc_url( $post['image'] ); ?>" /></a>
-                        <div class="popular-link-div"><a href="<?php echo esc_url( $post['permalink'] ); ?>" class="popular-link-a"><?php echo esc_attr( wp_kses ( $post['title'], array() )); ?></a></div>
+						<a href="<?php echo esc_url( $post['permalink'] ); ?>" title="<?php echo esc_attr( wp_kses( $post['title'], array() ) ); ?>" class="bump-view" data-bump-view="tp"><img src="<?php echo esc_url( $post['image'] ); ?>" /></a>
+					     <div class="popular-link-div"><a href="<?php echo esc_url( $post['permalink'] ); ?>" class="popular-link-a"><?php echo esc_attr( wp_kses ( $post['title'], array() )); ?></a></div>
 					</div>
 
 
