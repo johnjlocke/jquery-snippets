@@ -1,0 +1,7 @@
+ $(function() {
+	$("nav li a").each(function() {
+		if (this.href == window.location) {
+			$(this).addClass("currentpage");
+		}
+	});
+});
